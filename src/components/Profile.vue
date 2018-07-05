@@ -200,28 +200,27 @@ export default {
     created(){
         this.showPage = false
 
+        let prom;
+        
         //hanya ambil data jika initial data kosong
         if(this.data){
-            this.people = this.data
-            this.getFilms(4)
-
-            let films = this.people.films
-            this.getSingleFilm(films[films.length-1])
-            this.showPage = true
-
-            return false
+            prom = new Promise(resolve => {
+                let newData = { data: this.data }
+                resolve(newData)
+            })
         }
-
-        axios.get('https://swapi.co/api/people/1')
-        .then(res => {
+        else{
+            prom = axios.get('https://swapi.co/api/people/1')
+        }
+        
+        prom.then(res => {
             this.people = res.data
             this.getFilms(4)
 
             let films = this.people.films
             this.getSingleFilm(films[films.length-1])
             this.showPage = true
-        })
-        .catch(error => console.log(error))
+        }).catch(error => console.log(error))
     }
 }
 </script>
