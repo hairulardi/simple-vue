@@ -1,6 +1,6 @@
 # star-wars
 
-> Assessment test front-end at blanja.com
+> SPA with Vue
 
 ## Build Setup
 
